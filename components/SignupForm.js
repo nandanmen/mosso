@@ -2,6 +2,7 @@ import React from 'react'
 import tw, { styled, theme } from 'twin.macro'
 import { HiChevronRight } from 'react-icons/hi'
 import { FaSpinner } from 'react-icons/fa'
+import { keyframes } from 'styled-components'
 
 const State = {
   Idle: 'idle',
@@ -9,7 +10,7 @@ const State = {
   Done: 'done',
 }
 
-export default function SignupForm() {
+export default function SignupForm(props) {
   const [formState, setState] = React.useState(State.Idle)
   const inputRef = React.useRef()
 
@@ -35,7 +36,11 @@ export default function SignupForm() {
 
   return (
     <>
-      <form tw="flex flex-wrap justify-center relative" onSubmit={handleSubmit}>
+      <Form
+        tw="flex flex-wrap justify-center relative"
+        onSubmit={handleSubmit}
+        {...props}
+      >
         <Label tw="mb-6 text-center md:(mb-0 border-r-2 border-current text-left)">
           Be in the know — sign up now to receive updates.
         </Label>
@@ -60,10 +65,32 @@ export default function SignupForm() {
             We've sent you a confirmation email — thanks for signing up!
           </p>
         )}
-      </form>
+      </Form>
     </>
   )
 }
+
+// -- Keyframes --
+
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+// -- Styled --
+
+const Form = styled.form`
+  animation: ${fadeUp} 0.8s ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0s);
+`
 
 const Label = styled.label`
   max-width: 20rem;

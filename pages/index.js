@@ -1,8 +1,8 @@
+import React from 'react'
 import Head from 'next/head'
 import tw, { styled, theme } from 'twin.macro'
 import { HiChevronRight } from 'react-icons/hi'
-
-import React from 'react'
+import { keyframes } from 'styled-components'
 
 import MossoLogo from '../components/MossoLogo'
 import SignupForm from '../components/SignupForm'
@@ -23,23 +23,26 @@ export default function Home() {
       <main tw="min-h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-800 px-8 py-20 lg:py-32">
         <article tw="text-white text-center">
           <Title>
-            <TitleText>m</TitleText>
+            <LeftTitle>m</LeftTitle>
             <StyledLogo />
-            <TitleText tw="-ml-2">sso</TitleText>
+            <RightTitle tw="-ml-2">sso</RightTitle>
           </Title>
           <div tw="space-y-20 flex flex-col items-center">
-            <Text>
+            <Text style={{ '--delay': '0.4s' }}>
               A brand new, climate-controlled, all-in-one growing appliance that
               can grow produce from anywhere in the world. Bring your childhood
               garden to your home kitchen, today.
             </Text>
-            <WatchFilmButton onClick={() => setShowVideo(true)}>
+            <WatchFilmButton
+              onClick={() => setShowVideo(true)}
+              style={{ '--delay': '0.5s' }}
+            >
               Watch the film{' '}
               <span tw="ml-2">
                 <HiChevronRight />
               </span>
             </WatchFilmButton>
-            <SignupForm />
+            <SignupForm style={{ opacity: 0, '--delay': '0.6s' }} />
           </div>
         </article>
         {showVideo && (
@@ -58,6 +61,46 @@ export default function Home() {
     </>
   )
 }
+
+// -- Keyframes --
+
+const fadeLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
+const fadeRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
+const fadeUp = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`
+
+// -- Styling --
 
 const Title = styled.h1`
   ${tw`flex items-center justify-center`}
@@ -90,6 +133,15 @@ const TitleText = styled.span`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation-fill-mode: forwards;
+`
+
+const LeftTitle = styled(TitleText)`
+  animation: ${fadeLeft} 0.8s ease-out;
+`
+
+const RightTitle = styled(TitleText)`
+  animation: ${fadeRight} 0.8s ease-out;
 `
 
 const WatchFilmButton = styled.button`
@@ -98,6 +150,11 @@ const WatchFilmButton = styled.button`
   padding: 1rem;
   border-radius: 1rem;
   transition: all 0.2s ease;
+  opacity: 0;
+
+  animation: ${fadeUp} 0.8s ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0s);
 `
 
 const StyledLogo = styled(MossoLogo)`
@@ -120,4 +177,9 @@ const Text = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   max-width: 36ch;
+
+  animation: ${fadeUp} 0.8s ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
 `

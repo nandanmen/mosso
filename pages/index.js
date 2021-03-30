@@ -49,7 +49,7 @@ export default function Home() {
           <Modal onClose={() => setShowVideo(false)}>
             <VideoContainer>
               <iframe
-                src="http://www.youtube.com/embed/ubdWSn14sXM"
+                src="https://www.youtube.com/embed/ubdWSn14sXM"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen

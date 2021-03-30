@@ -2,10 +2,15 @@ import Head from 'next/head'
 import tw, { styled, theme } from 'twin.macro'
 import { HiChevronRight } from 'react-icons/hi'
 
+import React from 'react'
+
 import MossoLogo from '../components/MossoLogo'
 import SignupForm from '../components/SignupForm'
+import Modal from '../components/Modal'
 
 export default function Home() {
+  const [showVideo, setShowVideo] = React.useState(false)
+
   return (
     <>
       <Head>
@@ -28,7 +33,7 @@ export default function Home() {
               can grow produce from anywhere in the world. Bring your childhood
               garden to your home kitchen, today.
             </Text>
-            <WatchFilmButton>
+            <WatchFilmButton onClick={() => setShowVideo(true)}>
               Watch the film{' '}
               <span tw="ml-2">
                 <HiChevronRight />
@@ -37,6 +42,18 @@ export default function Home() {
             <SignupForm />
           </div>
         </article>
+        {showVideo && (
+          <Modal onClose={() => setShowVideo(false)}>
+            <VideoContainer>
+              <iframe
+                src="http://www.youtube.com/embed/ubdWSn14sXM"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </VideoContainer>
+          </Modal>
+        )}
       </main>
     </>
   )
@@ -49,6 +66,23 @@ const Title = styled.h1`
   font-size: clamp(6rem, 15vw, 12rem);
   line-height: 1;
   margin-bottom: 0.5em;
+`
+
+const VideoContainer = styled.div`
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  width: min(calc(100vw - 2rem), 1200px);
+  border-radius: 1rem;
+
+  iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
 `
 
 const TitleText = styled.span`

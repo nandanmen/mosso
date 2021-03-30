@@ -32,8 +32,8 @@ export default function MossoLogo(props) {
       </g>
       <defs>
         <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0%" stop-color="#4b5563" />
-          <stop offset="100%" stop-color="white" />
+          <stop offset="0%" stopColor="#4b5563" />
+          <stop offset="100%" stopColor="white" />
         </linearGradient>
       </defs>
     </svg>

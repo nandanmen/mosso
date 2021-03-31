@@ -33,15 +33,24 @@ export default function Home() {
               can grow produce from anywhere in the world. Bring your childhood
               garden to your home kitchen, today.
             </Text>
-            <WatchFilmButton
-              onClick={() => setShowVideo(true)}
-              style={{ '--delay': '0.5s' }}
-            >
-              Watch the film{' '}
-              <span tw="ml-2">
-                <HiChevronRight />
-              </span>
-            </WatchFilmButton>
+            <Links style={{ '--delay': '0.5s' }}>
+              <WatchFilmButton onClick={() => setShowVideo(true)}>
+                Watch the film{' '}
+                <span tw="ml-2">
+                  <HiChevronRight />
+                </span>
+              </WatchFilmButton>
+              <a
+                tw="flex items-center hover:underline"
+                href="./infographic.pdf"
+                target="_blank"
+              >
+                Get the infographic
+                <span tw="ml-2">
+                  <HiChevronRight />
+                </span>
+              </a>
+            </Links>
             <SignupForm style={{ opacity: 0, '--delay': '0.6s' }} />
           </div>
         </article>
@@ -144,17 +153,23 @@ const RightTitle = styled(TitleText)`
   animation: ${fadeRight} 0.8s ease-out;
 `
 
+const Links = styled.ul`
+  ${tw`space-x-8`}
+
+  opacity: 0;
+  animation: ${fadeUp} 0.8s ease-out;
+  animation-fill-mode: forwards;
+  animation-delay: var(--delay, 0s);
+  display: flex;
+  align-items: center;
+`
+
 const WatchFilmButton = styled.button`
   ${tw`flex text-base items-center md:text-xl border-2 border-gray-300 hover:(bg-gray-300 text-gray-800)`}
 
   padding: 1rem;
   border-radius: 1rem;
   transition: all 0.2s ease;
-  opacity: 0;
-
-  animation: ${fadeUp} 0.8s ease-out;
-  animation-fill-mode: forwards;
-  animation-delay: var(--delay, 0s);
 `
 
 const StyledLogo = styled(MossoLogo)`
